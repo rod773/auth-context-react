@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "../hooks/AuthProvider";
 
 export default function Login() {
   const [input, setInput] = useState({
@@ -6,12 +7,14 @@ export default function Login() {
     password: "",
   });
 
+  const auth = useAuth();
   const handleSubmitEvent = (e) => {
     e.preventDefault();
     if (input.username !== "" && input.password !== "") {
-      //dispatch action from hooks
+      auth.loginAction(input);
+      return;
     }
-    alert("please provide a valid input");
+    alert("pleae provide a valid input");
   };
 
   const handleInput = (e) => {
